@@ -5,21 +5,23 @@ import at.ac.fhcampuswien.newsapi.beans.NewsResponse;
 import at.ac.fhcampuswien.newsapi.enums.Category;
 import at.ac.fhcampuswien.newsapi.enums.Country;
 import at.ac.fhcampuswien.newsapi.enums.Endpoint;
+import at.ac.fhcampuswien.newsapi.enums.Language;
 
 import java.util.List;
 
 public class NewsAPIExample {
 
-    public static final String APIKEY = "myKey";    //TODO add your api key
+    public static final String APIKEY = "a3dc3f7d35a44956a7c27fd64f067322";    //TODO add your api key
 
     public static void main(String[] args){
 
         NewsApi newsApi = new NewsApiBuilder()
                 .setApiKey(APIKEY)
-                .setQ("corona")
+                .setQ("")
                 .setEndPoint(Endpoint.TOP_HEADLINES)// example of how to use enums
                 .setSourceCountry(Country.at)       // example of how to use enums
-                .setSourceCategory(Category.health) // example of how to use enums
+                .setSourceCategory(Category.science) // example of how to use enums
+                .setLanguage(Language.en)
                 .createNewsApi();
 
             NewsResponse newsResponse = newsApi.getNews();
@@ -32,7 +34,7 @@ public class NewsAPIExample {
                 .setApiKey(APIKEY)
                 .setQ("corona")
                 .setEndPoint(Endpoint.EVERYTHING)
-                .setFrom("2020-03-20")
+                .setFrom("2021-06-12")
                 .setExcludeDomains("Lifehacker.com")
                 .createNewsApi();
 
@@ -42,6 +44,5 @@ public class NewsAPIExample {
             List<Article> articles = newsResponse.getArticles();
             articles.stream().forEach(article -> System.out.println(article.toString()));
         }
-
     }
 }

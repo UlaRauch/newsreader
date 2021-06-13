@@ -114,6 +114,7 @@ public class NewsApi {
         this.endpoint = endpoint;
     }
 
+    //create URL object from url string, open connection, get inputstream (JSON) and attach to response
     protected String requestData() {
         String url = buildURL();
         System.out.println("URL: " + url);
@@ -184,6 +185,7 @@ public class NewsApi {
         return sb.toString();
     }
 
+    //macht Java Object aus JSON (return von request) mit Objectmapper
     public NewsResponse getNews() {
         NewsResponse newsReponse = null;
         String jsonResponse = requestData();
