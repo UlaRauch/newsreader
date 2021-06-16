@@ -36,9 +36,6 @@ public class Controller {
         } catch (NewsApiException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new NewsApiException("There was an error: " + e.getMessage());
         }
 
         if (articles != null && !articles.isEmpty()) {
