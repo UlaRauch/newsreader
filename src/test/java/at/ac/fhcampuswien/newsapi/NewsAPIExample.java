@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.newsapi;
 
+import at.ac.fhcampuswien.NewsApiException.NewsApiException;
 import at.ac.fhcampuswien.newsapi.beans.Article;
 import at.ac.fhcampuswien.newsapi.beans.NewsResponse;
 import at.ac.fhcampuswien.newsapi.enums.Category;
@@ -16,19 +17,25 @@ public class NewsAPIExample {
     public static void main(String[] args){
 
         NewsApi newsApi = new NewsApiBuilder()
-                .setApiKey(APIKEY)
-                .setQ("")
+                .setApiKey(APIKEY) //exc - key doesn't exist -> nullpointer? funktioniert nicht
+                .setQ("") //exc - not a string -> Numberformat exception?
                 .setEndPoint(Endpoint.TOP_HEADLINES)// example of how to use enums
                 .setSourceCountry(Country.at)       // example of how to use enums
                 .setSourceCategory(Category.science) // example of how to use enums
                 .setLanguage(Language.en)
                 .createNewsApi();
 
-            NewsResponse newsResponse = newsApi.getNews();
+        NewsResponse newsResponse = null;
+        try {
+           newsResponse = newsApi.getNews();
             if(newsResponse != null){
                 List<Article> articles = newsResponse.getArticles();
                 articles.stream().forEach(article -> System.out.println(article.toString()));
+
             }
+            } catch (NewsApiException e) {
+            System.err.println(e.getMessage());
+        }
 
         newsApi = new NewsApiBuilder()
                 .setApiKey(APIKEY)
@@ -38,7 +45,11 @@ public class NewsAPIExample {
                 .setExcludeDomains("Lifehacker.com")
                 .createNewsApi();
 
+        try {
             newsResponse = newsApi.getNews();
+        } catch (NewsApiException e) {
+            System.err.println(e.getMessage());
+        }
 
         if(newsResponse != null){
             List<Article> articles = newsResponse.getArticles();
