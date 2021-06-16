@@ -17,7 +17,7 @@ public class Controller {
 
     public static final String APIKEY = "a3dc3f7d35a44956a7c27fd64f067322";  //TODO add your api key
 
-    public void process(NewsApiBuilder newsApiBuilder) throws NewsApiException {
+    public void process(NewsApiBuilder newsApiBuilder) {
         System.out.println("Start process");
 
         NewsApi newsApi = newsApiBuilder
@@ -30,9 +30,6 @@ public class Controller {
         try {
             newsResponse = newsApi.getNews();
             articles = newsResponse.getArticles();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            throw new NewsApiException("Couldn't load any articles. Try different Parameters. " + e.getMessage());
         } catch (NewsApiException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
@@ -40,7 +37,6 @@ public class Controller {
 
         if (articles != null && !articles.isEmpty()) {
             articles.stream().forEach(article -> System.out.println(article.toString()));
-
 
             System.out.println("\n-------Analysis--------");
 
@@ -54,7 +50,7 @@ public class Controller {
             printTitlesSorted(articles);
 
             //load original articles
-            System.out.println("Do you want to download these articles? type y for yes, or any other key to get back to the menu: ");
+            System.out.println("Do you want to download these articles? type y for yes, or just ENTER to get back to the menu: ");
             Scanner scanner = new Scanner(System.in);
             String answer = scanner.nextLine();
             if (answer.equals("y")) {

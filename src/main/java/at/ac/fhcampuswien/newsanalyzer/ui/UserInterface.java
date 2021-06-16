@@ -26,11 +26,7 @@ public class UserInterface {
                 .setFrom(new java.sql.Date(System.currentTimeMillis()).toString()) //today
                 .setSortBy(SortBy.POPULARITY);
 
-        try {
             ctrl.process(newsApiBuilder);
-        } catch (NewsApiException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
     public void getDataFromCtrl2() {
@@ -43,11 +39,7 @@ public class UserInterface {
                 //.setFrom("2021-06-12")
                 .setSortBy(SortBy.RELEVANCY);
 
-        try {
             ctrl.process(newsApiBuilder);
-        } catch (NewsApiException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
     public void getDataFromCtrl3() {
@@ -59,11 +51,7 @@ public class UserInterface {
                 .setEndPoint(Endpoint.TOP_HEADLINES) //Everything is not currently supported with Country param
                 .setSortBy(SortBy.RELEVANCY);
 
-        try {
             ctrl.process(newsApiBuilder);
-        } catch (NewsApiException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
     public void getDataForCustomInput() {
@@ -75,11 +63,7 @@ public class UserInterface {
         String q = scanner.nextLine();
         newsApiBuilder.setQ(q)
                 .setEndPoint(Endpoint.TOP_HEADLINES);
-        try {
             ctrl.process(newsApiBuilder);
-        } catch (NewsApiException e) {
-            System.err.println(e.getMessage());
-        }
     }
 
 
