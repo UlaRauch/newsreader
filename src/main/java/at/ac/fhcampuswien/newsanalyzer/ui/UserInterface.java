@@ -74,8 +74,7 @@ public class UserInterface {
         Scanner scanner = new Scanner(System.in);
         String q = scanner.nextLine();
         newsApiBuilder.setQ(q)
-                .setEndPoint(Endpoint.TOP_HEADLINES)
-                .setLanguage(Language.en);
+                .setEndPoint(Endpoint.TOP_HEADLINES);
         try {
             ctrl.process(newsApiBuilder);
         } catch (NewsApiException e) {

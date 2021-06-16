@@ -126,7 +126,7 @@ public class NewsApi {
         } catch (MalformedURLException e) {
             // TODO improve ErrorHandling
             //e.printStackTrace();
-            throw new NewsApiException("URL Syntax is wrong. What can we do about that? Try another category or type q to quit.");
+            throw new NewsApiException("Problem with URL format: " + e.getMessage() + " What can we do about that? Type q to quit.");
         }
 
         //con has to be initialized with null in order to be called in the catch block
@@ -159,7 +159,7 @@ public class NewsApi {
         try {
              urlbase = String.format(NEWS_API_URL, getEndpoint().getValue(), getQ(), getApiKey());
         } catch (IllegalFormatException e) {
-            throw new NewsApiException("Error while building URL: " + e.getMessage());
+            throw new NewsApiException("Format problem while building URL: " + e.getMessage());
         }
 
         StringBuilder sb = new StringBuilder(urlbase);
@@ -214,11 +214,11 @@ public class NewsApi {
                 newsReponse = objectMapper.readValue(jsonResponse, NewsResponse.class);
                 if(!"ok".equals(newsReponse.getStatus())){
                     //System.err.println("Error: "+newsReponse.getStatus());
-                    throw new NewsApiException("Error: "+newsReponse.getStatus());
+                    throw new NewsApiException("JSON Mapping Error: "+newsReponse.getStatus());
                 }
             } catch (JsonProcessingException e) {
                 //System.out.println("Error: "+e.getMessage());
-                throw new NewsApiException("Error: "+e.getMessage());
+                throw new NewsApiException("JSON Processing Error: "+e.getMessage());
             }
         }
         //TODO improve Errorhandling
