@@ -127,6 +127,8 @@ public class NewsApi {
             // TODO improve ErrorHandling
             //e.printStackTrace();
             throw new NewsApiException("Problem with URL format: " + e.getMessage() + " What can we do about that? Type q to quit.");
+        } catch (Exception e) {
+            throw new NewsApiException("An unexpected exception has occurred: " + e.getMessage());
         }
 
         //con has to be initialized with null in order to be called in the catch block
@@ -149,6 +151,8 @@ public class NewsApi {
             }
             throw new NewsApiException("Communication problems with the server. "
                     + e.getMessage() + " Maybe try again, or quit.");
+        } catch (Exception e) {
+            throw new NewsApiException("An unexpected exception has occurred: " + e.getMessage());
         }
         return response.toString();
     }
@@ -160,6 +164,8 @@ public class NewsApi {
              urlbase = String.format(NEWS_API_URL, getEndpoint().getValue(), getQ(), getApiKey());
         } catch (IllegalFormatException e) {
             throw new NewsApiException("Format problem while building URL: " + e.getMessage());
+        } catch (Exception e) {
+            throw new NewsApiException("An unexpected exception has occurred: " + e.getMessage());
         }
 
         StringBuilder sb = new StringBuilder(urlbase);
@@ -219,6 +225,8 @@ public class NewsApi {
             } catch (JsonProcessingException e) {
                 //System.out.println("Error: "+e.getMessage());
                 throw new NewsApiException("JSON Processing Error: "+e.getMessage());
+            } catch (Exception e) {
+                throw new NewsApiException("An unexpected exception has occurred: " + e.getMessage());
             }
         }
         //TODO improve Errorhandling

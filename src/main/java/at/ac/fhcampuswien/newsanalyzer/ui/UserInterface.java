@@ -56,13 +56,12 @@ public class UserInterface {
 
     public void getDataForCustomInput() {
         NewsApiBuilder newsApiBuilder = new NewsApiBuilder();
-        //parameter nicht setzen, nur an process weitergeben
         //get Keyword
         System.out.println("type a keyword: ");
         Scanner scanner = new Scanner(System.in);
         String q = scanner.nextLine();
         newsApiBuilder.setQ(q)
-                .setEndPoint(Endpoint.TOP_HEADLINES);
+                .setEndPoint(Endpoint.EVERYTHING);
             ctrl.process(newsApiBuilder);
     }
 

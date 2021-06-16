@@ -33,6 +33,8 @@ public class Controller {
         } catch (NewsApiException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("An unexpected exception has occurred: " + e.getMessage());
         }
 
         if (articles != null && !articles.isEmpty()) {
